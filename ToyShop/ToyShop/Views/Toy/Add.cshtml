@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Toy Management";
+
+}
+@using ToyShop.Models
+@model Toy
+<form asp-controller="Toy" asp-action="Add" method="post">
+    Name:<input type="text" asp-for="Name" required/>
+    <span asp-validation-for="Name"></span><br />
+    Description:<input type="text" asp-for="Description" required/>
+    <span asp-validation-for="Description"></span><br />
+    Image:<input type="text" asp-for="Image" />
+    <span asp-validation-for="Image"></span><br />
+    Price:<input type="text" asp-for="Price" required/>
+    <span asp-validation-for="Price"></span><br />
+    Quantity:<input type="text" asp-for="Quantity" required/><br />
+    
+    Category:
+    <select name="cateid" asp-for="Categoryid">
+        <option value="0">All</option>
+        @foreach (var c in ViewBag.categories)
+        {
+            @if (ViewBag.cateidselected == c.Categoryid)
+            {
+                <option value="@c.Categoryid" selected>@c.Name</option>
+            }
+            else
+            {
+                <option value="@c.Categoryid">@c.Name</option>
+            }
+        }
+    </select><br />
+    <input type="submit" value="ADD" /> <br />
+</form>

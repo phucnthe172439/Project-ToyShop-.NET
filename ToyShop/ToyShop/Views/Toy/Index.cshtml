@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Toy Management";
+
+}
+@model List<Toy>
+<form id="frm" asp-controller="Toy" asp-action="Index" method="post" asp-route-id="">
+    <select name="cateid" onchange="change()">
+        <option value="0">All</option>
+        @foreach (Category c in ViewBag.categories)
+        {
+            @if (ViewBag.cateidselected == c.Categoryid)
+            {
+                <option value="@c.Categoryid" selected>@c.Name</option>
+            }
+            else
+            {
+                <option value="@c.Categoryid">@c.Name</option>
+            }
+        }
+    </select>
+</form>
+<script>
+    function change() {
+        document.getElementById("frm").submit();
+    }
+</script>
+<a class="btn btn-primary" asp-controller="Toy" asp-action="Add">
+    Create a new Post
+</a>
+<table class="table table-bordered table-responsive table-hover">
+    <thead style="background-color:lightpink">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            
+        </tr>
+
+    </thead>
+    @foreach(var t in Model)
+    {
+        <tbody>
+            <tr >
+                <th scope="row">@t.Toyid</th>
+                <th>@t.Name</th>
+                <th>@t.Description</th>
+                <th>@t.Image</th>
+                <th>@t.Price VND</th>
+                <th>@t.Quantity</th>
+            </tr>
+        </tbody>
+    }
+
+</table>
